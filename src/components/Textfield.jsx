@@ -9,8 +9,8 @@ function Textfield({
   minDate,
   maxDate,
   name,
-  // value,
-  // onChange,
+  value,
+  onChange,
   textInputValue,
   handleTextInputChange,
 }) {
@@ -31,8 +31,11 @@ function Textfield({
         min={minDate}
         max={maxDate}
         name={name}
-        value={textInputValue}
-        onChange={handleTextInputChange}
+        // value={textInputValue}
+        // onChange={handleTextInputChange}
+
+        onChange={onChange}
+        value={value}
         required
       />
     </div>

@@ -13,6 +13,22 @@ import {
   ReCAPTCHA,
 } from "./index.js";
 import ButtonsAll from "./components/Buttons.component";
+import Thankyou from "./components/Thankyou.component";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Thankyou />,
+    children: [
+      {
+        path: "/Thankyou",
+        element: <Thankyou />,
+      },
+    ],
+  },
+]);
+
 function App() {
   //initial state of ReCaptcha
   const onChange = () => {};
@@ -21,31 +37,37 @@ function App() {
   //password Validation
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    // Check if passwords match and update the passwordMatch state
+    setPasswordMatch(newPassword === confirmPassword);
   };
 
   const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
+    const newConfirmPassword = e.target.value;
+    setConfirmPassword(newConfirmPassword);
+    // Check if passwords match and update the passwordMatch state
+    setPasswordMatch(password === newConfirmPassword);
   };
 
-  const validatePassword = () => {
-    const passwordInput = document.getElementById("password");
-    const confirmPasswordInput = document.getElementById("confirm_password");
+  // const validatePassword = () => {
+  //   const passwordInput = document.getElementById("password");
+  //   const confirmPasswordInput = document.getElementById("confirm_password");
 
-    if (password.length < 8) {
-      passwordInput.setCustomValidity(
-        "Password must be at least 8 characters long"
-      );
-    } else if (password !== confirmPassword) {
-      confirmPasswordInput.setCustomValidity("Passwords do not match");
-    } else {
-      passwordInput.setCustomValidity("");
-      confirmPasswordInput.setCustomValidity("");
-    }
-  };
-
+  //   if (password.length < 8) {
+  //     passwordInput.setCustomValidity(
+  //       "Password must be at least 8 characters long"
+  //     );
+  //   } else if (password !== confirmPassword) {
+  //     confirmPasswordInput.setCustomValidity("Passwords do not match");
+  //   } else {
+  //     passwordInput.setCustomValidity("");
+  //     confirmPasswordInput.setCustomValidity("");
+  //   }
+  // };
   //for Reseting everything except Captcha
 
   const [textInputValue, setTextInputValue] = useState("");
@@ -55,8 +77,15 @@ function App() {
   };
 
   const handleResetClick = () => {
+    // setTextInputValue("");
+    // //for captcha reset
+    // setCaptchaKey(Math.random().toString());
+    // setCaptchaVal(null);
+
     setTextInputValue("");
-    //for captcha reset
+    setPassword("");
+    setConfirmPassword("");
+    // Reset the captcha
     setCaptchaKey(Math.random().toString());
     setCaptchaVal(null);
   };
@@ -65,13 +94,32 @@ function App() {
 
   const [captchaKey, setCaptchaKey] = useState(Math.random().toString());
 
+  //for conditional rendering of route
+
+  const [stateMessage, setStateMessage] = useState(false);
+
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    if (!passwordMatch) {
+      // If passwords do not match then prevent the form submission
+      alert("Passwords do not match. Please check your passwords.");
+      return;
+    }
+    setStateMessage(true);
+    setTimeout(() => {
+      setStateMessage(false);
+      handleResetClick();
+    }, 5000);
+  };
+
   return (
     <>
       <main className="flex flex-col items-center justify-center w-screen min-h-screen border bg-cyan-300 p-[3rem]">
         <form
           action=""
           className="flex flex-col items-left w-[45%] h-auto p-10 bg-white min-w-1/2 border-t-4 border-gradient-to-br from-borderClr to-outlineClr"
-          onSubmit={(e) => e.preventDefault()}
+          // onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
         >
           <h1 className="text-3xl font-bold text-center text-borderClr">
             STUDENT REGISTRATION FORM
@@ -93,6 +141,7 @@ function App() {
             placeholder={"Enter Last Name"}
           />
           <br />
+
           <Checkfield label={"Gender"} />
           <br />
           <Textfield
@@ -124,7 +173,7 @@ function App() {
             id={"password"}
             onChange={handlePasswordChange}
             value={password}
-            onBlur={validatePassword}
+            // onBlur={validatePassword}
             required
           />
           <br />
@@ -136,9 +185,17 @@ function App() {
             id={"confirm_password"}
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
-            onBlur={validatePassword}
+            // onBlur={validatePassword}
             required
           />
+          <br />
+          <div className="w-full pl-[14rem]">
+            {!passwordMatch && (
+              <div className="font-bold text-borderClr">
+                Passwords do not match
+              </div>
+            )}
+          </div>
           <br />
           <Phonedropdown placeholder={"Enter your phone number"} />
           <br />
@@ -160,7 +217,12 @@ function App() {
             key={captchaKey}
           />
           <br />
-          <ButtonsAll disabled={!captchaVal} />
+          <ButtonsAll
+            disabled={!captchaVal}
+            handleResetClick={handleResetClick}
+          />
+          <br />
+          {stateMessage && <RouterProvider router={router} />}
         </form>
       </main>
     </>

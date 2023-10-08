@@ -1,14 +1,19 @@
 import React from "react";
-// import { useState } from "react";
+import { useState } from "react";
 
-// function RadioButtons() {
-// const [selectedOption, setSelectedOption] = useState("Male");
+// function RadioButtons({}) {
+//   const [selectedOption, setSelectedOption] = useState("Male");
 //   const handleOptionChange = (event) => {
 //     setSelectedOption(event.target.value);
 //   };
 // }
 
 function Checkfield({ id, label }) {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
   return (
     <div className="flex justify-between w-full">
       <label
@@ -23,8 +28,8 @@ function Checkfield({ id, label }) {
           type="radio"
           id={id}
           value="Male"
-          // checked={selectedOption === "Male"}
-          // onChange={handleOptionChange}
+          checked={selectedOption === "Male"}
+          onChange={handleOptionChange}
           required
         />
         Male
@@ -33,8 +38,8 @@ function Checkfield({ id, label }) {
           type="radio"
           id={id}
           value="Female"
-          // checked={selectedOption === "Female"}
-          // onChange={handleOptionChange}
+          checked={selectedOption === "Female"}
+          onChange={handleOptionChange}
           required
         />
         Female
