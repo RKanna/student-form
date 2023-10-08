@@ -53,21 +53,6 @@ function App() {
     setPasswordMatch(password === newConfirmPassword);
   };
 
-  // const validatePassword = () => {
-  //   const passwordInput = document.getElementById("password");
-  //   const confirmPasswordInput = document.getElementById("confirm_password");
-
-  //   if (password.length < 8) {
-  //     passwordInput.setCustomValidity(
-  //       "Password must be at least 8 characters long"
-  //     );
-  //   } else if (password !== confirmPassword) {
-  //     confirmPasswordInput.setCustomValidity("Passwords do not match");
-  //   } else {
-  //     passwordInput.setCustomValidity("");
-  //     confirmPasswordInput.setCustomValidity("");
-  //   }
-  // };
   //for Reseting everything except Captcha
 
   const [textInputValue, setTextInputValue] = useState("");
