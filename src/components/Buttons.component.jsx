@@ -4,14 +4,14 @@ const ButtonsAll = ({ disabled, handleResetClick, handleSubmit }) => {
     <div className="flex items-center justify-around">
       <input
         type="submit"
-        className="pl-[5.5rem] pt-[0.3rem] pb-[0.3rem] pr-[5.5rem] border cursor-pointer bg-gradient-to-br from-borderClr to-outlineClr rounded-md text-white font-bold hover:bg-gradient-to-br hover:from-outlineClr hover:to-borderClr"
+        className="pl-[5.5rem] pt-[0.3rem] pb-[0.3rem] pr-[5.5rem] border cursor-pointer bg-gradient-to-br from-borderClr to-outlineClr rounded-md text-white font-bold hover:bg-gradient-to-br hover:from-outlineClr hover:to-borderClr forbtnsOnly"
         value="Register"
         disabled={disabled}
         onSubmit={handleSubmit}
       />
       <input
         type="reset"
-        className="pl-[5.5rem] pt-[0.3rem] pb-[0.3rem] pr-[5.5rem] border cursor-pointer bg-gradient-to-br from-borderClr to-outlineClr rounded-md text-white font-bold hover:bg-gradient-to-br hover:from-outlineClr hover:to-borderClr"
+        className="pl-[5.5rem] pt-[0.3rem] pb-[0.3rem] pr-[5.5rem] border cursor-pointer bg-gradient-to-br from-borderClr to-outlineClr rounded-md text-white font-bold hover:bg-gradient-to-br hover:from-outlineClr hover:to-borderClr forbtnsOnly"
         value="Reset"
         onClick={handleResetClick}
       />

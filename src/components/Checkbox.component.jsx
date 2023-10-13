@@ -34,7 +34,7 @@ function Checkbox({ label }) {
       >
         {label}
       </label>
-      <div className="w-[75%] pt-[0.5rem] pb-[0.5rem] flex gap-12">
+      <div className="w-[75%] pt-[0.5rem] pb-[0.5rem] flex gap-12 forHobbies">
         <label className="font-bold text-RedFont">
           <input
             type="checkbox"

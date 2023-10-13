@@ -71,3 +71,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+@media screen and (max-width: 768px) {
+  .forHobbies {
+    gap: 1rem;
+  }
+  .forbtnsOnly {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+}

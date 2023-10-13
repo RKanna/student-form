@@ -102,7 +102,7 @@ function App() {
       <main className="flex flex-col items-center justify-center w-screen min-h-screen border bg-cyan-300 p-[3rem]">
         <form
           action=""
-          className="flex flex-col items-left w-[45%] h-auto p-10 bg-white min-w-1/2 border-t-4 border-gradient-to-br from-borderClr to-outlineClr"
+          className="flex flex-col items-left w-[45%] h-auto p-10 bg-white min-w-[27rem] border-t-4 border-gradient-to-br from-borderClr to-outlineClr"
           // onSubmit={(e) => e.preventDefault()}
           onSubmit={handleSubmit}
         >
